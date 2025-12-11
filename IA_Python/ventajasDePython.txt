@@ -1,0 +1,1 @@
+Python es un buen lenguaje para la creación de IA ya que con este se puede utilizar la GPU lo que hace el entrenamiento y utilización de la red muchísimo mas rápido 
