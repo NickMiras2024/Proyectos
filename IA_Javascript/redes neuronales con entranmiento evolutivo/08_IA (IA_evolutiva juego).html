@@ -1,0 +1,372 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_IA</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" height="550px" width="550px"></canvas>
+    <h1 class="vuelta" id="vuelta"></h1>
+    <script>
+
+        let vuelta1 = document.getElementById('vuelta')
+
+
+        function New_Red(datosDeEntrada) {
+            function initWeights(size) {
+                let weights = [];
+                for (let i = 0; i < size; i++) {
+                    weights.push(Math.random() * 2 - 1);  // Valores entre -1 y 1
+                }
+                return weights;
+            }
+            // Función de activación Sigmoide
+            function sigmoid(x) {
+                return 1 / (1 + Math.exp(-x));
+            }
+            function leakyReLU(x, alpha = 0.01) {
+                return x > 0 ? x : alpha * x;
+            }
+
+
+
+            function utilizarNeu(capaOculta1, capaSalida1, data) {
+                // console.log(data)
+                // console.log(capaOculta1)
+                function suma(inputs, weights) {
+                    // console.log(inputs, weights)
+                    let sum = 0;
+                    for (let i = 0; i < inputs.length; i++) {
+                        sum += inputs[i] * weights[i];
+                    }
+                    return sum;
+                }
+                let result1 = []
+                for (let i = 0; i < capaOculta1.length; i++) {
+                    let suma1 = leakyReLU(suma(data, capaOculta1[i][0]) + capaOculta1[i][1])
+                    result1.push(suma1)
+                }
+                // console.log(result1)
+
+                let resF = []
+                for (let i = 0; i < capaSalida1.length; i++) {
+                    let suma1 = sigmoid(suma(result1, capaSalida1[i][0]) + capaSalida1[i][1])
+                    resF.push(suma1)
+                }
+                // console.log(resF)
+                return resF
+            }
+
+
+            let neuronasOCultas = 16
+            let neuronasSalida = 4
+
+
+            let capaOculta = []
+
+            let capaSalida = []
+
+            for (let i = 0; i < neuronasOCultas; i++) {
+                let pesos = initWeights(datosDeEntrada)
+                let bias = Math.random(); // Inicializar el sesgo
+                capaOculta.push([pesos, bias])
+            }
+
+            for (let i = 0; i < neuronasSalida; i++) {
+                let pesos = initWeights(neuronasOCultas)
+                let bias = Math.random(); // Inicializar el sesgo
+                capaSalida.push([pesos, bias])
+            }
+            // console.log(capaOculta)
+
+            return { capaOculta, capaSalida, utilizarNeu }
+
+        }
+
+
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+
+        let enemigo = {
+            x: 250,
+            y: 250,
+            h: 20,
+            w: 20,
+            color: "red"
+        }
+
+        let individuos = [
+
+        ]
+
+
+        function crearIndividuo(x, y, h, w, color, red2 = undefined, red3 = undefined) {
+
+            let red_neuronal = New_Red(4)
+
+            let data = {
+                x,
+                y,
+                h,
+                w,
+                color,
+                red_neuronalF: {
+                    capaOculta: red_neuronal.capaOculta,
+                    capaSalida: red_neuronal.capaSalida,
+                    utilizarNeu: red_neuronal.utilizarNeu
+                }
+            }
+            // console.log(data.red_neuronalF)
+            if (red2 !== undefined && red3 !== undefined) {
+                for (let i = 0; i < data.red_neuronalF.capaOculta.length; i++) {
+                    let datos = red3.capaOculta[i]
+                    let datos2 = red2.capaOculta[i]
+                    for (let e = 0; e < datos.length; e++) {
+                        datos[0][e] = Math.random() <= 0.5 ? datos[e] : datos2[e]
+                        if (Math.random() < 0.1) {  // Probabilidad de mutación del 10%
+                            datos[0][e] += Math.random() * 0.2 - 0.1;  // Cambios pequeños aleatorios
+                        }
+                    }
+                    datos[1] = Math.random() <= 0.5 ? datos[1] * Math.random() : datos2[1] * Math.random()
+
+                }
+                for (let i = 0; i < data.red_neuronalF.capaSalida.length; i++) {
+                    let datos = red3.capaSalida[i]
+                    let datos2 = red2.capaSalida[i]
+                    for (let e = 0; e < datos.length; e++) {
+                        datos[0][e] = Math.random() <= 0.5 ? datos[e] : datos2[e]
+                        if (Math.random() < 0.1) {  // Probabilidad de mutación del 10%
+                            datos[0][e] += Math.random() * 0.2 - 0.1;  // Cambios pequeños aleatorios
+                        }
+                    }
+                    datos[1] = Math.random() <= 0.5 ? datos[1] * Math.random() : datos2[1] * Math.random()
+
+                }
+            }
+            individuos.push(data)
+
+
+        }
+
+        function generarNumeroRandom() {
+            // Math.random() genera un número decimal entre 0 y 1
+            // Multiplicamos por 491 para que el rango sea de 0 a 490 (491 números posibles)
+            // Math.floor() redondea hacia abajo para obtener un número entero
+            return Math.floor(Math.random() * 491);
+        }
+
+
+        let colores = ['green', 'blue', 'pink', 'yellow']
+
+        async function crear() {
+
+            for (let s = 0; s < 100; s++) {
+                crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, colores[s])
+            }
+            update()
+        }
+
+        function colisionaCon(rect1, rect2) {
+            // Detecta si dos rectángulos colisionan
+            return (
+                rect1.x < rect2.x + rect2.w &&
+                rect1.x + rect1.w > rect2.x &&
+                rect1.y < rect2.y + rect2.h &&
+                rect1.y + rect1.h > rect2.y
+            );
+        }
+
+        let speed = 15
+        let vuelta = 1
+
+        let contador = 0
+        let velocidad = 5;  // Velocidad de movimiento del enemigo
+
+
+        function update() {
+
+            contador += 1 / 60
+
+            if (4 >= contador) {
+
+                let tiempor = 4 - contador
+                vuelta1.innerText = vuelta + ':' + Math.floor(tiempor) + '::' + individuos.length
+
+                ctx.clearRect(0, 0, 550, 550);
+
+                // Dibujar el enemigo
+                ctx.fillStyle = enemigo.color;
+                ctx.fillRect(enemigo.x, enemigo.y, enemigo.h, enemigo.w);
+
+                // Encontrar el individuo más cercano
+                let individuoMasCercano = null;
+                let distanciaMasCorta = Infinity;
+
+                // Bucle inverso para eliminar individuos sin romper el bucle
+                for (let i = individuos.length - 1; i >= 0; i--) {
+                    let individuo = individuos[i];
+
+                    // Detectar si el enemigo colisiona con el individuo
+                    if (colisionaCon(enemigo, individuo)) {
+                        // Eliminar el individuo del array
+                        individuos.splice(i, 1);
+                        continue; // Saltar el resto del código de movimiento para este individuo
+                    }
+
+                    // Calcular la distancia euclidiana entre el enemigo y el individuo
+                    let dx = individuo.x - enemigo.x;
+                    let dy = individuo.y - enemigo.y;
+                    let distancia = Math.sqrt(dx * dx + dy * dy);
+
+                    // Si esta distancia es la más corta hasta ahora, lo marcamos como el más cercano
+                    if (distancia < distanciaMasCorta) {
+                        distanciaMasCorta = distancia;
+                        individuoMasCercano = individuo;
+                    }
+
+                    // Dibujar el individuo
+                    ctx.fillStyle = individuo.color;
+                    ctx.fillRect(individuo.x, individuo.y, individuo.h, individuo.w);
+
+                    // Decisiones de movimiento del individuo usando la red neuronal
+                    let res = individuo.red_neuronalF.utilizarNeu(individuo.red_neuronalF.capaOculta, individuo.red_neuronalF.capaSalida, [enemigo.x, enemigo.y, individuo.x, individuo.y]);
+
+                    let indiceM = 0;
+                    let max = 0;
+                    // console.log("___________________")
+
+                    for (let e = 0; e < res.length; e++) {
+                        // console.log(res[e],max,indiceM)
+
+                        if (max < res[e]) {
+                            indiceM = e;
+                            max = res[e]
+                        }
+                    }
+                    // console.log(indiceM)
+
+                    if (indiceM == 0 && individuo.x <= 490 && 0 < individuo.x) {
+                        individuo.x += -speed;
+                    }
+
+                    if (indiceM == 1 && individuo.x <= 490 && 0 < individuo.x) {
+                        individuo.x += speed;
+                    }
+
+                    if (indiceM == 2 && individuo.y <= 490 && 0 < individuo.y) {
+                        individuo.y += -speed;
+                    }
+
+                    if (indiceM == 3 && individuo.y <= 490 && 0 < individuo.y) {
+                        individuo.y += speed;
+                    }
+                }
+
+                // Mover el enemigo hacia el individuo más cercano
+                if (individuoMasCercano) {
+                    let dx = individuoMasCercano.x - enemigo.x;
+                    let dy = individuoMasCercano.y - enemigo.y;
+
+                    // Normalizar el vector de movimiento
+                    let distancia = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distancia > 1) {  // Evitar que el enemigo "salte" demasiado
+                        enemigo.x += (dx / distancia) * velocidad;
+                        enemigo.y += (dy / distancia) * velocidad;
+                    }
+                }
+
+            } else {
+
+                if (individuos.length >= 2) {
+
+                    let DM = 0
+                    let DM2 = 0
+                    let NDM1 = 0
+                    let NDM2 = 1
+                    let neu1 = undefined
+                    let neu2 = undefined
+
+
+                    for (let g = 0; g < 2; g++) {
+                        for (let r = 0; r < individuos.length; r++) {
+                            let dis = Math.abs(enemigo.x - individuos[r].x) * Math.abs(enemigo.x - individuos[r].x)
+                            if (DM < dis && g == 0) {
+                                DM = dis
+                                NDM1 = r
+                                neu1 = individuos[r]
+                            } else {
+                                if (DM2 < dis) {
+                                    DM2 = dis
+                                    NDM2 = r
+                                    neu2 = individuos[r]
+                                }
+                            }
+                        }
+                        individuos.splice(NDM1, 1)
+
+                    }
+                    individuos = []
+
+
+
+                    individuos.push(neu1)
+                    individuos.push(neu2)
+                    console.log(neu1)
+                    console.log(neu2)
+
+
+
+
+
+                    neu1.x = 490
+                    neu1.y = 490
+
+                    neu2.x = 490
+                    neu2.y = 490
+
+                    async function generar() {
+                        for (let i = 0; i < 8; i++) {
+                            crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, "green", neu1.red_neuronalF, neu2.red_neuronalF)
+                            crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, "blue", neu2.red_neuronalF, neu1.red_neuronalF)
+                            crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, "pinck", neu1.red_neuronalF, neu2.red_neuronalF)
+                            crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, "yellow", neu2.red_neuronalF, neu1.red_neuronalF)
+
+                        }
+                    }
+
+                    generar()
+
+                } else {
+                    async function gener() {
+                        for (let s = 0; s < 40; s++) {
+                            crearIndividuo(await generarNumeroRandom(), await generarNumeroRandom(), 10, 10, colores[s])
+                        }
+                    }
+                    gener()
+                }
+
+                enemigo.x = 250 - (enemigo.w / 2) + Math.random()
+                enemigo.y = 250 - (enemigo.w / 2) + Math.random()
+                vuelta++
+                contador = 0
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        crear()
+
+
+
+    </script>
+</body>
+
+</html>

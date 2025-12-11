@@ -1,0 +1,180 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_IA</title>
+</head>
+
+<body>
+    <script>
+
+
+        function CALPRO(datos, pesos) {
+            let suma = 0;
+            for (let i = 0; i < datos.length; i++) {
+                suma += datos[i] * pesos[i];
+            }
+            return suma
+        }
+
+        function calculoDP(pesos, respuesta, datos, sesgo) {
+            let m = datos.length
+            let perdida = 0;
+
+            for (let i = 0; i < datos.length; i++) {
+                let prediccion = CALPRO(datos[i], pesos) + sesgo;
+                perdida += (respuesta[i] - prediccion) ** 2
+            }
+            return perdida / (2 * datos.length)
+
+        }
+
+
+
+        function crearModeloYEntrenar(datos, respuestas, tasaDeAprendisaje, ciclosDeAprendisaje) {
+            console.log('entrenando modelo...')
+            let CDI = datos[0].length
+            let pesos = Array(CDI).fill(0)
+            let sesgo = 0
+            let HDP =[]
+            // console.log(sesgo)
+
+
+            for (let i = 0; ciclosDeAprendisaje > i; i++) {
+                let gradiente = Array(CDI).fill(0)
+                let gradienteDS = 0
+
+
+                for (let j = 0; j < datos.length; j++) {
+                    let datitos = datos[j]
+                    let pruebaLinea = CALPRO(datitos, pesos) + sesgo;
+                    let error = respuestas[j] - pruebaLinea;
+
+
+
+                    for (let ac = 0; gradiente.length > ac; ac++) {
+                        gradiente[ac] +=error * datitos[ac]
+                    }
+
+                    gradienteDS +=  error
+
+                    
+                }
+                for(let ac = 0; pesos.length > ac; ac++){
+                    pesos[ac] += (tasaDeAprendisaje / datos.length) * gradiente[ac]
+                }
+
+                sesgo += (tasaDeAprendisaje / datos.length ) * gradienteDS
+
+
+
+
+                let perdida1 = calculoDP(pesos,respuestas,datos,sesgo)
+                HDP.push(perdida1)
+
+
+                // console.log(pesos)
+
+            }
+            console.log('modelo entrenado...')
+            console.log('historial de perdidas: ',HDP)
+
+            return { pesos, sesgo }
+        }
+
+        // Ejemplo de uso
+        const datos = [
+            [2100, 3, 10],  // Tamaño=2100, Habitaciones=3, Distancia=10 km
+            [1600, 2, 20],  // Tamaño=1600, Habitaciones=2, Distancia=20 km
+            [2400, 4, 15],  // Tamaño=2400, Habitaciones=4, Distancia=15 km
+            [1400, 2, 25],  // Tamaño=1400, Habitaciones=2, Distancia=25 km
+            [3000, 5, 5],   // Tamaño=3000, Habitaciones=5, Distancia=5 km
+            [1800, 3, 18],
+            [2500, 4, 12],
+            [2000, 3, 22],
+            [1500, 2, 30],
+            [3500, 5, 8],
+            [1700, 2, 20],
+            [2100, 3, 15],
+            [2600, 4, 10],
+            [1400, 2, 28],
+            [3200, 5, 6],
+            [1600, 2, 24],
+            [1900, 3, 20],
+            [2400, 4, 14],
+            [1200, 1, 35],
+            [3600, 5, 7],
+            [2300, 3, 16],
+            [2500, 4, 12],
+            [1400, 2, 30],
+            [2900, 5, 9],
+            [1800, 3, 20],
+            [1600, 2, 25],
+            [3000, 5, 10],
+            [2200, 3, 15],
+            [2400, 4, 12],
+            [1400, 2, 32],
+            [3300, 5, 7],
+            [2000, 3, 18],
+            [1800, 2, 22],
+            [2600, 4, 12],
+            [1500, 2, 28],
+            [3400, 5, 8],
+            [1700, 2, 25],
+            [2200, 3, 20],
+            [2500, 4, 14],
+            [1300, 1, 35],
+            [3100, 5, 6],
+            [2100, 3, 16],
+            [2000, 2, 28],
+            [2700, 4, 10],
+            [1400, 1, 33],
+            [3600, 5, 7],
+            [2300, 3, 17],
+            [1500, 2, 30],
+            [3300, 5, 6]
+        ];
+
+        const respuestas = [
+            400000, 330000, 369000, 232000, 540000,
+            360000, 475000, 310000, 200000, 600000,
+            290000, 370000, 490000, 210000, 610000,
+            310000, 340000, 460000, 150000, 620000,
+            400000, 480000, 220000, 560000, 320000,
+            270000, 550000, 370000, 460000, 220000,
+            590000, 350000, 300000, 480000, 230000,
+            605000, 240000, 375000, 475000, 140000,
+            580000, 395000, 290000, 525000, 150000,
+            620000, 410000, 220000, 580000, 590000
+        ];
+
+        const tasaDeAprendisaje = 0.0000001;
+        const ciclosDeAprendisaje = 1000
+
+        function pruebaLinea(datos, modelo) {
+            let suma = 0;
+            for (let i = 0; i < datos.length; i++) {
+                suma += datos[i] * modelo.pesos[i]
+            }
+            return suma + modelo.sesgo
+        }
+
+
+        let modelo = crearModeloYEntrenar(datos, respuestas, tasaDeAprendisaje, ciclosDeAprendisaje);
+
+        console.log('valores del modelo', modelo)
+
+        console.log('realizando pruebas')
+
+        let tasaDeError = 0
+        let numDD = 0
+
+        let prediccionDeModelo = Math.floor(pruebaLinea(datos[numDD], modelo))
+        console.log('resultado del modelo:', prediccionDeModelo, 'resultado buscado :', respuestas[numDD], 'error:', respuestas[numDD] - prediccionDeModelo)
+
+
+    </script>
+</body>
+
+</html>

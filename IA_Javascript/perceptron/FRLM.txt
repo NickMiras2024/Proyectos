@@ -1,0 +1,60 @@
+// Función para entrenar una regresión lineal múltiple
+function trainLinearRegressionMultiple(data, labels, learningRate, epochs) {
+  const numFeatures = data[0].length;
+  const weights = Array(numFeatures).fill(0); // Inicializar los pesos a 0
+  let bias = 0; // Inicializar el sesgo a 0
+
+  // Entrenamiento a través de iteraciones
+  for (let epoch = 0; epoch < epochs; epoch++) {
+    for (let i = 0; i < data.length; i++) {
+      // Calcular la salida del modelo
+      const linearCombination = dotProduct(weights, data[i]) + bias;
+      const error = labels[i] - linearCombination;
+
+      // Actualizar los pesos y el sesgo
+      for (let j = 0; j < weights.length; j++) {
+        weights[j] += learningRate * error * data[i][j];
+      }
+      bias += learningRate * error;
+    }
+  }
+
+  return { weights, bias };
+}
+
+// Función para calcular el producto punto
+function dotProduct(vec1, vec2) {
+  let result = 0;
+  for (let i = 0; i < vec1.length; i++) {
+    result += vec1[i] * vec2[i];
+  }
+  return result;
+}
+
+// Función para predecir el valor de y
+function predictLinearRegressionMultiple(model, point) {
+  const { weights, bias } = model;
+  return dotProduct(weights, point) + bias;
+}
+
+// Ejemplo de uso
+const data = [
+  [2100, 3, 10],  // Tamaño=2100, Habitaciones=3, Distancia=10 km
+  [1600, 2, 20],  // Tamaño=1600, Habitaciones=2, Distancia=20 km
+  [2400, 4, 15],  // Tamaño=2400, Habitaciones=4, Distancia=15 km
+  [1400, 2, 25],  // Tamaño=1400, Habitaciones=2, Distancia=25 km
+  [3000, 5, 5]    // Tamaño=3000, Habitaciones=5, Distancia=5 km
+];
+
+const labels = [400000, 330000, 369000, 232000, 540000]; // Precios de las casas
+
+const learningRate = 0.000001;
+const epochs = 10000;
+
+const model = trainLinearRegressionMultiple(data, labels, learningRate, epochs);
+
+console.log("Modelo entrenado:", model);
+
+const testPoint = [2000, 3, 20];
+const prediction = predictLinearRegressionMultiple(model, testPoint);
+console.log(`La predicción para el punto [${testPoint}] es: ${prediction}`);

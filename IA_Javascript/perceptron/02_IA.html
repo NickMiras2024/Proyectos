@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_IA</title>
+</head>
+
+<body>
+    <script>
+
+
+        function sacarProm(arr){
+            let result = 0
+            for(let i = 0; arr.length > i;i++){
+                result += arr[i]
+            }
+            return result / arr.length
+        }
+
+        function crearModeloYEntrenar(x,y) {
+            let NX = x.length
+            let PX = sacarProm(x);
+            let PY = sacarProm(y);
+
+            let num = 0
+            let den = 0
+            for(let i = 0; NX > i;i++ ){
+                num += (x[i] - PX)*( y[i] - PY);
+                den += (x[i] - PX)**2 
+            }
+
+            let PEND = num/den
+            let OAO =  PY - (PEND * PX)
+
+
+            return {OAO,PEND}
+
+
+        }
+
+
+        function utilizarNeurona(x,modelo){
+            let result = modelo.PEND * x + modelo.OAO
+            return result
+        }
+
+
+        let tamaño = [50, 60, 70, 80, 90];
+        let precio = [150, 180, 210, 240, 270];
+
+
+        let modelo = crearModeloYEntrenar(tamaño,precio);
+
+        console.log('modelo entrenado',modelo)
+
+
+        let valorP = 100*100
+
+        console.log('una casa de', valorP ,'M saldria unos',utilizarNeurona(valorP,modelo),'USD')
+
+
+
+    </script>
+</body>
+
+</html>

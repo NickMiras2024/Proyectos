@@ -1,0 +1,27 @@
+function regresionLineal(x, y) {
+  let n = x.length;
+  let x_mean = x.reduce((a, b) => a + b, 0) / n;
+  let y_mean = y.reduce((a, b) => a + b, 0) / n;
+  let num = 0;
+  let denom = 0;
+
+  for (let i = 0; i < n; i++) {
+    num += (x[i] - x_mean) * (y[i] - y_mean);
+    denom += (x[i] - x_mean) ** 2;
+  }
+
+  let slope = num / denom;
+  let intercept = y_mean - (slope * x_mean);
+
+  return { slope, intercept };
+}
+
+let tamaño = [50, 60, 70, 80, 90];
+let precio = [150, 180, 210, 240, 270];
+let modelo = regresionLineal(tamaño, precio);
+console.log(modelo); // { slope: 3.0, intercept: 0.0 }
+
+// Usar el modelo para predecir el precio de una casa de 100 metros cuadrados
+let tamaño_nuevo = 100;
+let precio_predicho = modelo.slope * tamaño_nuevo + modelo.intercept;
+console.log(precio_predicho); // 300

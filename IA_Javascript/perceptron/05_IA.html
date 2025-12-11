@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_IA</title>
+</head>
+
+<body>
+    <script>
+
+
+        function calcularValor(datos,pesos){
+            let total = 0;
+            for (let i = 0; i < datos.length; i++) {
+                total += datos[i] * pesos[i]
+            }   
+            return total
+        }
+
+
+        function calcularPerdida(datos,respuestas,pesos,sesgo){
+            let totalDePerdida = 0;
+            for (let i = 0; i < datos.length; i++) {
+                let prediccion = calcularValor(datos[i],pesos) + sesgo
+                totalDePerdida += (respuestas[i] - prediccion) ** 2
+            }
+            return totalDePerdida / (2 * datos.length) 
+        }
+
+
+
+        function crearModeloYEntrenar(datos,respuestas,ciclosDeAprendisaje,tasaDeAprendisaje){
+            let cantidadDePesos = datos[0].length
+            let pesos = Array(cantidadDePesos).fill(0)
+            let sesgo = 0
+            let historialDePerdidas = []
+
+            for (let i = 0; i < ciclosDeAprendisaje; i++){
+                let gradiente = Array(cantidadDePesos).fill(0)
+                let gradienteDelSesgo = 0
+
+                for (let j = 0; j < datos.length; j++){
+                   let datitos = datos[j]
+                   
+
+                    let prediccion = calcularValor(datitos,pesos) + sesgo;
+                    let error = respuestas[j] - prediccion
+
+                    
+                    for (let g = 0; g < gradiente.length; g++){
+                        gradiente[g] += error * datitos[g]
+                    }
+                    gradienteDelSesgo += error
+                    
+                }
+                for (let p = 0; p < pesos.length; p++){
+                    pesos[p] += (tasaDeAprendisaje / datos.length) * gradiente[p]
+                }
+                sesgo -= (tasaDeAprendisaje / datos.length) * gradienteDelSesgo
+
+
+                let perdida = calcularPerdida(datos,respuestas,pesos,sesgo)
+
+                historialDePerdidas.push(perdida)
+
+
+
+            }
+            return {pesos,sesgo,historialDePerdidas}
+
+
+        }
+
+
+        function crearPrediccion(datos,modelo){
+            let prediccion = calcularValor(datos,modelo.pesos) + modelo.sesgo
+            return prediccion
+        }
+
+
+        let datos = [
+            [8,100,14], //ram,almacenamiento,tamaño de pantalla en pulgadas
+            [16,100,14],
+            [6,50,20],
+            [32,200,10],
+            [8,200,16],
+        ]
+
+        let respuestas = [3000,5000,7000,10000,6000]
+
+        let tasaDeAprendisaje = 0.000001
+
+        let ciclosDeAprendisaje = 6000
+
+
+        let modelo  = crearModeloYEntrenar(datos,respuestas,ciclosDeAprendisaje,tasaDeAprendisaje)
+        console.log(modelo.historialDePerdidas)
+        console.log(modelo)
+
+        //[16,200,15]
+        let num = 4
+        let prediccion = crearPrediccion(datos[num],modelo)
+        console.log(Math.floor(prediccion),respuestas[num],respuestas[num] - Math.floor(prediccion))
+
+    </script>
+</body>
+
+</html>

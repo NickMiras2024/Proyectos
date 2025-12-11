@@ -1,0 +1,2 @@
+En estas caroetas se puede ver como fue mejorando mi estudio y conocimiento.
+A medida que voy aprendiendo nuevos conceptos voy creando modelos con el objetivo de entender al 100% lo anteriormente aprendido

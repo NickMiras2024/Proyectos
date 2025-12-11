@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06_IA</title>
+</head>
+
+<body>
+
+    <script>
+
+        function sigmoide(x) {
+            return 1 / (1 + Math.exp(-x));
+        }
+
+        function Lineal (x){
+            return x
+        }
+
+        function derivadaSigmoide(x) {
+            return x * (1 - x);
+        }
+
+        function crearNeurona(numDeDatos, numDFDA) {
+            let bias = Math.random()
+            let pesos = Array(numDeDatos)
+            for (let i = 0; i < numDeDatos; i++) {
+                pesos[i] = Math.random()
+            }
+
+            CDN++
+            return {
+                FDA: numDFDA == 0 ? sigmoide : Lineal,
+                derivada: numDFDA == 0 ? derivadaSigmoide : () =>{return 1},
+                bias,
+                pesos,
+                numN: CDN
+            }
+        }
+
+        function utilizarNeu(neu, datos) {
+            let r = 0
+            for (let i = 0; i < datos.length; i++) {
+                r += neu.pesos[i] * datos[i]
+            }
+            return neu.FDA(r + neu.bias)
+        }
+
+        let datos = [
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [1, 1],
+        ]
+
+        let result = [
+            0,
+            0,
+            0,
+            0
+        ]
+
+        let tasaDeAprendisaje = 0.1
+
+        let CDN = 0
+
+
+
+
+
+        let neuO1 = crearNeurona(datos[0].length,1)
+        let neuO2 = crearNeurona(datos[0].length,1)
+        let neuS = crearNeurona(2,0)
+
+
+        function entrenar(vueltas) {
+            console.log('entrenando...')
+            for (let e = 0; e < vueltas; e++) {
+                for (let i = 0; i < datos.length; i++) {
+
+                    let resO1 = utilizarNeu(neuO1, datos[i])
+                    let resO2 = utilizarNeu(neuO2, datos[i])
+                    let resS = utilizarNeu(neuS, [resO1, resO2])
+
+                    let err = result[i] - resS
+
+                    let derS = err * neuS.derivada(resS)
+
+
+
+                    for (let w = 0; w < neuS.pesos.length; w++) {
+                        neuS.pesos[w] += -(tasaDeAprendisaje * derS * [resO1, resO2][w])
+                        // console.log(neuS.pesos[w])
+                    }
+
+                    // let errO1 = derS * neuS.pesos[0]
+                    // let errO2 = derS * neuS.pesos[1]
+
+                    // let derO1 = errO1 * neuO1.derivada(resO1)
+                    // let derO2 = errO2 * neuO2.derivada(resO2)
+
+                    // Error en las neuronas ocultas
+                    let errO1 = derS * neuS.pesos[0];
+                    let errO2 = derS * neuS.pesos[1];
+
+                    let derO1 = errO1 * neuO1.derivada(resO1);
+                    let derO2 = errO2 * neuO2.derivada(resO2);
+
+
+                    for (let w2 = 0; w2 < neuO1.pesos.length; w2++) {
+                        neuO1.pesos[w2] += - (tasaDeAprendisaje * derO1 * datos[i][w2])
+                        neuO2.pesos[w2] += -(tasaDeAprendisaje * derO2 * datos[i][w2])
+                    }
+                    // console.log('---- pesos ocultos ----')
+                    // console.log(neuO1.pesos)
+                    // console.log(neuO2.pesos)
+
+
+
+                }
+            }
+            console.log('entrenamiento completado')
+        }
+
+        entrenar(10000)
+
+        function calc() {
+            console.log("-------------------------------------------")
+
+            for (let i = 0; i < datos.length; i++) {
+                let resO1 = utilizarNeu(neuO1, datos[i])
+                let resO2 = utilizarNeu(neuO2, datos[i])
+                let resS = utilizarNeu(neuS, [resO1, resO2])
+
+                console.log('---- prueba ----')
+                console.log(resS, "i", i)
+                console.log(result[i])
+
+            }
+            console.log(neuS.pesos)
+            console.log(neuO1.pesos)
+            console.log(neuO2.pesos)
+
+        }
+        calc()
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

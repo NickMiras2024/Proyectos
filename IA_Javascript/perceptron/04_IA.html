@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regresión Lineal Múltiple con Descenso del Gradiente</title>
+</head>
+<body>
+    <script>
+        // Función para calcular el costo (función de pérdida cuadrática)
+        function computeCost(X, y, theta) {
+            const m = y.length; // Número de ejemplos
+            let totalCost = 0;
+
+            for (let i = 0; i < m; i++) {
+                const prediction = X[i].reduce((acc, val, idx) => acc + val * theta[idx], 0);
+                const error = prediction - y[i];
+                totalCost += error * error;
+            }
+
+            return (1 / (2 * m)) * totalCost;
+        }
+
+        // Función para realizar el descenso del gradiente
+        function gradientDescent(X, y, theta, learningRate, iterations) {
+            const m = y.length; // Número de ejemplos
+            const costHistory = [];
+
+            for (let i = 0; i < iterations; i++) {
+                const gradients = Array(theta.length).fill(0);
+
+                for (let j = 0; j < m; j++) {
+                    const prediction = X[j].reduce((acc, val, idx) => acc + val * theta[idx], 0);
+                    for (let k = 0; k < theta.length; k++) {
+                        gradients[k] += (prediction - y[j]) * X[j][k];
+                    }
+                }
+
+                for (let k = 0; k < theta.length; k++) {
+                    theta[k] -= (learningRate / m) * gradients[k];
+                }
+
+                costHistory.push(computeCost(X, y, theta));
+            }
+
+            return { theta, costHistory };
+        }
+
+        // Datos de ejemplo
+        const X = [
+            [1, 2100, 3], // [Intercepto, Tamaño, Habitaciones]
+            [1, 1600, 2],
+            [1, 2400, 4],
+            [1, 1400, 2],
+            [1, 3000, 5]
+        ];
+
+        const y = [400000, 330000, 369000, 232000, 540000]; // Precios de casas
+
+        // Inicialización de parámetros
+        let theta = [0, 0, 0]; // Parámetros iniciales (Intercepto, Tamaño, Habitaciones)
+        const learningRate = 0.0000001; // Tasa de aprendizaje
+        const iterations = 1000; // Número de iteraciones para el descenso del gradiente
+
+        // Ejecutar descenso del gradiente
+        const result = gradientDescent(X, y, theta, learningRate, iterations);
+
+        // Resultados
+        console.log('Parámetros optimizados:', result.theta);
+        console.log('Historial de costos:', result.costHistory);
+    </script>
+</body>
+</html>

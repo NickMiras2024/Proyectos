@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHATIA</title>
+    <style>
+        body {
+            background-color: #aaa;
+        }
+        .contenedorDeDialogo {
+            height: 500px;
+            width: 400px;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            min-width: 400px;
+        }
+
+        .contenedorInteractuador {
+            height: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            bottom: 10%;
+            position: fixed;
+        }
+
+        .contenedorF {
+            display: flex;
+            height: 470px;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: scroll;
+
+        }
+
+        .barraDePreguntas {
+            height: 20px;
+            width: 80%;
+            border-radius: 10px;
+            border: 1px solid #000;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-left: 10px;
+            border: 1px solid #000;
+        }
+
+        .btn:hover {
+            background-color: #3e8e41;
+        }
+
+        .texto0 {
+            width: 55%;
+            background-color: #15de1c;
+            border-radius: 5px;
+            padding-left: 10px;
+            text-align: center;
+
+        }
+
+        .texto1 {
+            width: 50%;
+            margin-left: 55%;
+            background-color: #17aeff;
+            border-radius: 5px;
+            padding-left: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedorF">
+        <div id="contenedorDeDialogo">
+
+        </div>
+        <div class="contenedorInteractuador">
+            <input type="text" name="" id="IPTT" class="barraDePreguntas">
+            <button class="btn" id="btn"></button>
+        </div>
+    </div>
+
+    <script>
+        const contenedor = document.getElementById('contenedorDeDialogo');
+        const IPTT = document.getElementById('IPTT');
+        const btn = document.getElementById('btn');
+
+
+        let DUL = 0
+
+        function crearMensaje(frase, propietario) {
+            let Cmensaje = document.createElement('div');
+
+            let mensaje = document.createElement('p');
+            mensaje.textContent = frase;
+            Cmensaje.setAttribute('class', `texto${propietario}`)
+            Cmensaje.appendChild(mensaje)
+            Cmensaje.style.top = DUL + 'px'
+            contenedor.appendChild(Cmensaje)
+            DUL = DUL + Cmensaje.style.height
+        }
+
+        async function utilizarRed(frase) {
+            let res = await fetch('http://192.168.100.25:3000/interactuar', {
+                method: 'POST', // Indicamos que es una petición POST
+                headers: {
+                    'Content-Type': 'application/json', // Especificamos que enviamos datos en formato JSON
+                },
+                body: JSON.stringify(frase) // Convertimos el objeto data a una cadena JSON
+            })
+            let resT = await res.text()
+
+            console.log(resT)
+            crearMensaje(resT, 0)
+
+        }
+
+        function enviarARed(frase) {
+            let fraseMod = frase.replace('?', ' ? ').replace('¿', ' ¿ ').replace('.', ' . ').replace(',', ' , ').replace('¡', ' ¡ ').replace('!', ' ! ')
+            utilizarRed({ input: fraseMod })
+        }
+
+
+
+        btn.addEventListener('click', (e) => {
+            let texto = IPTT.value
+            if (texto.length > 2) {
+                crearMensaje(texto, 1)
+                enviarARed(texto)
+
+            }else{
+                alert('escribí algo')
+            }
+            IPTT.value = ''
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

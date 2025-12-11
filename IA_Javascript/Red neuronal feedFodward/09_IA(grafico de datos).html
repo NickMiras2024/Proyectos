@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<canvas id="canvas1" height="1000px" width="1000px"></canvas>
+
+<body>
+    <script>
+        let canvas = document.getElementById('canvas1')
+        let ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'red'
+        // datos de humedad, presion y temperatura
+        function numeroAleatorio() {
+            return Math.floor(Math.random() * 101);
+        }
+
+
+        function IP() {
+            let arr = []
+            arr.push(numeroAleatorio())
+            arr.push(numeroAleatorio())
+
+            datos.push(arr)
+
+            if (
+                // arr[0] < 80 
+                // && 20 < arr[0]
+                // &&
+                 arr[1] < 80
+                 && 
+                 20 < arr[1]
+            ) {
+                respuestas.push(1)
+            } else {
+                respuestas.push(0)
+
+            }
+
+        }
+
+
+        let datos = [
+        ];
+
+        let respuestas = [
+
+        ];
+
+
+
+        for (let i = 0; i < 1000; i++) {
+            IP()
+        }
+        console.log(respuestas, datos)
+
+        let datos2 = [
+            [0, 0, 0],
+            [1, 0, 1],
+            [0, 1, 0],
+            [1, 1, 1],
+
+        ];
+
+        let respuestas2 = [
+            0, 1, 0, 1
+        ];
+
+
+
+        ctx.fillStyle = 'black'
+        ctx.fillRect(0, 0, 1000, 1)
+        ctx.fillRect(0, 0, 1, 1000)
+
+        for (let i = 0; i < datos.length; i++) {
+
+            // respuestas2[i] == 1 ? ctx.fillStyle = 'green' : 
+
+
+            // ctx.fillStyle = `rgba(100,0,0,0.${(datos[i][0])})`
+
+            // ctx.fillRect(datos[i][1] * 10, datos[i][2] * 10, 6, 6)
+
+            respuestas[i] == 1 ? ctx.fillStyle = 'green' : ctx.fillStyle = 'red'
+
+            ctx.fillRect(datos[i][0] * 2, datos[i][1] * 2, 3, 3)
+
+        }
+
+    </script>
+</body>
+
+</html>

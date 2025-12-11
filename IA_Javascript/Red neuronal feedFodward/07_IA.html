@@ -1,0 +1,230 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA_7</title>
+</head>
+
+<body>
+    <script>
+        // Función de activación Sigmoide
+        function sigmoid(x) {
+            return 1 / (1 + Math.exp(-x));
+        }
+
+
+        // Derivada de la función Sigmoide
+        function sigmoidDerivative(x) {
+            return x * (1 - x);
+        }
+
+
+        function relu(x) {
+            return Math.max(0, x);
+        }
+
+        function reluDerivative(x) {
+            return x > 0 ? 1 : 0;
+        }
+
+
+        // Inicialización de los pesos con valores aleatorios
+        function initWeights(size) {
+            let weights = [];
+            for (let i = 0; i < size; i++) {
+                weights.push(Math.random() * 2 - 1);  // Valores entre -1 y 1
+            }
+            return weights;
+        }
+
+        // Inicialización de las neuronas
+        let ocultas2 = []
+        let ocultas = [];
+        let salida = [];
+
+        // Función para hacer el producto punto de dos arrays
+        function suma(inputs, weights) {
+            let sum = 0;
+            for (let i = 0; i < inputs.length; i++) {
+                sum += inputs[i] * weights[i];
+            }
+            return sum;
+        }
+
+        function crearNeurona(numDeDatos, capa) {
+            let pesos = initWeights(numDeDatos);
+            let bias = Math.random(); // Inicializar el sesgo
+            if (capa == 0) {
+                salida.push({ pesos, bias });
+            } else {
+                if (capa == 1) {
+                    ocultas2.push({ pesos, bias });
+
+                } else {
+                    ocultas.push({ pesos, bias });
+
+                }
+            }
+        }
+
+        function procesamientoHaciaDelante(datos) {
+
+            // let results1 = []
+
+            // // Procesar la capa oculta1
+            // for (let i = 0; i < ocultas2.length; i++) {
+            //     let z = relu(suma(datos, ocultas2[i].pesos) + ocultas2[i].bias); // Agregar el sesgo
+            //     results1.push(z);
+            // }
+
+            let results = [];
+
+            // Procesar la capa oculta
+            for (let i = 0; i < ocultas.length; i++) {
+                let z = relu(suma(datos, ocultas[i].pesos) + ocultas[i].bias); // Agregar el sesgo
+                results.push(z);
+            }
+            let respuesta = 0;
+            // Procesar la capa de salida
+            for (let r = 0; r < salida.length; r++) {
+                let z = sigmoid(suma(results, salida[r].pesos) + salida[r].bias); // Agregar el sesgo
+                // console.log('neurona activada : ', r);
+                // console.log('activacion : ', z);
+                respuesta = z;
+            }
+            // console.log(results)
+            return { respuesta, results };
+        }
+
+        function calcularError(res, respuestas) {
+            return (1 / 2) * (respuestas - res) ** 2;
+        }
+
+        function procesamientoHaciaAtras(tasaDeAprendisaje, datos, respuestas, espoch) {
+            for (let e = 0; e < espoch; e++) {
+                let errorP = 0
+                let delta = 0
+                let delta2 = 0
+                let resultsO = [0,0]
+                
+                for (let s = 0; s < datos.length; s++) {
+                    let resultados = procesamientoHaciaDelante(datos[s]);
+                    let res = resultados.respuesta
+                    resultsO[0] += 1/4 + resultados.results[0]
+                    resultsO[1] += 1/4 + resultados.results[1]
+
+                    // console.log(resultados.results)
+                    let error = calcularError(res, respuestas[s]);
+                    // console.log(res)
+                    errorP += error
+                    // console.log(`Error en iteración ${e}, muestra ${s}: ${error}`);
+                    delta += ((res - respuestas[s]) * (res * (1 - res)))
+                    delta2+= (res - respuestas[s]) * reluDerivative(res)
+
+                }
+                
+                // console.log(res,respuestas[s])
+                // Actualización de la neurona de salida
+                for (let i = 0; i < salida.length; i++) {
+                    // Gradiente de la salida
+                    // let gradienteSalida = error * sigmoidDerivative(res);
+                    salida[i].bias += -tasaDeAprendisaje * (1/4 * delta) * 1; // Actualización del sesgo de salida
+
+                    for (let w = 0; w < salida[i].pesos.length; w++) {
+                        let gradienteSalida = (1/4 * delta) * salida[i].pesos[w]
+                        salida[i].pesos[w] += -tasaDeAprendisaje * gradienteSalida;
+                    }
+                }
+                // console.log(resultsO)
+
+
+                // Retropropagación para la capa oculta
+                for (let i2 = 0; i2 < ocultas.length; i2++) {
+
+                    // Actualización del sesgo de la capa oculta
+                    ocultas[i2].bias += -tasaDeAprendisaje * (1/4 * delta2) * 1;
+
+                    for (let w2 = 0; w2 < ocultas[i2].pesos.length; w2++) {
+                        let GradienteOculto = (1/4 * delta2) * salida[0].pesos[i2] * resultsO[i2] * ocultas[i2].pesos[w2]
+                        ocultas[i2].pesos[w2] += -tasaDeAprendisaje * GradienteOculto;
+                    }
+                }
+                // console.log(ocultas2)
+                // Retropropagación para la capa oculta
+                for (let i3 = 0; i3 < ocultas2.length; i3++) {
+
+                    // Actualización del sesgo de la capa oculta
+                    ocultas2[i3].bias += -tasaDeAprendisaje * (1/4 * delta2) * 1;
+
+                    // console.log(ocultas)
+                    for (let w3 = 0; w3 < ocultas2[i3].pesos.length; w3++) {
+                        let GradienteOculto = (1/4 * delta2) * ocultas[0].pesos[i3] * ocultas[1].pesos[i3] * resultsO[i3] * ocultas[i3].pesos[w3]
+                        ocultas2[i3].pesos[w3] += -tasaDeAprendisaje * GradienteOculto;
+                    }
+                }
+
+                console.log(errorP)
+
+            }
+            console.log('Listo');
+            Probar()
+        }
+
+        // Datos de entrenamiento para la función XOR
+        let datos = [
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [1, 1]
+        ];
+
+        let respuestas = [
+            0,
+            1,
+            1,
+            0
+        ];
+
+        let tasaDeAprendisaje = 0.2;
+        let espoch = 7000;
+
+        // Crear las neuronas
+        crearNeurona(2, 2); // Capa de salida
+        crearNeurona(2, 2); // Capa oculta
+        crearNeurona(3, 0); // Capa oculta
+        // crearNeurona(2, 2); // Capa de salida
+        // crearNeurona(2, 2); // Capa oculta
+        // crearNeurona(2, 2); // Capa oculta
+
+        // Entrenar la red neuronal
+        procesamientoHaciaAtras(tasaDeAprendisaje, datos, respuestas, espoch);
+
+        // Probar la red neuronal
+        function Probar() {
+            let errores = 0
+            for (let i = 0; i < datos.length; i++) {
+                console.log('______________');
+                let res = procesamientoHaciaDelante(datos[i]);
+                let error = respuestas[i] - res.respuesta;
+                let respuestaF = res.respuesta < 0.5 ? 0 : 1
+                // console.log(`Resultado: ${respuestaF},y ${res.respuesta} ,resultado esperado : ${respuestas[i]} Error: ${error}`);
+                errores += Math.abs(respuestaF - respuestas[i])
+                console.log(respuestaF, respuestas[i], Math.abs(respuestaF - respuestas[i]));
+            }
+            console.log(errores)
+            // if (errores == 1) {
+            //     console.log('red neuronal 100 inteligente')
+            // } else {
+            //     console.log('red neuronal no inteligente')
+            //     setTimeout(() => {
+            //         procesamientoHaciaAtras(tasaDeAprendisaje, datos, respuestas, espoch);
+            //     }, 5000);
+
+            // }
+        }
+
+    </script>
+</body>
+
+</html>
