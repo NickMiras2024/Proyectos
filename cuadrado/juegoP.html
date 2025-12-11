@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>juegoP</title>
+    <style>
+        .terreno{
+            background-color: rgb(187, 37, 37);
+            max-width: 1000px;
+            min-width: 1000px;
+            height: 500px;
+            position: relative;
+        }
+        .user{
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0px 0px 18px 5px rgb(0, 211, 141) ;
+            width: 50px;
+            height: 50px;
+            background-color: rgb(0, 255, 170);
+        }
+        .mal{
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0px 0px 18px 5px rgb(0, 39, 211) ;
+            width: 50px;
+            height: 50px;
+            background-color: rgb(4, 0, 255);
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="terreno">
+        <div class="user" id="user"></div>
+        <div class="mal" id="mal"></div>
+    </div>
+    <script>
+        let mal = document.getElementById('mal');
+        let malPA = 100;
+        let malPL = 100;
+        let iz =0;
+        let de = 0;
+        let inicio = 0;
+        let user = document.getElementById('user');
+        let terreno = document.querySelector('.terreno');
+        document.addEventListener('keydown',mover);
+
+        function mover(e) {
+            console.log(e.key)
+            if(e.key == "a" && iz > 0){
+                iz--;
+            };
+            if(e.key == "d" && iz < 1000){
+                iz++;
+            };
+            if(e.key == "w" && de > 0){
+                de--;
+            };
+            if(e.key == "s" && de < 500){
+                de++;
+            };
+            inicio=1;
+            user.style.top = de + 'px';
+            user.style.left = iz + 'px';
+            if(inicio == 1){
+                CreMal()
+            }
+        }
+
+        function CreMal(){
+            if(malPA < de){
+                let interval1 =setInterval(() => {
+                    malPA--;
+                    if(malPA== 0){
+                        clearInterval(interval1);
+                    }
+                    if(malPA== de){
+                        clearInterval(interval1);
+                    }
+                }, 100);                
+            };
+            /*if(malPA > de){
+                let interval2 =setInterval(() => {
+                    malPA--;
+                    if(malPA==0){
+                        clearInterval(interval2);
+                    }
+                }, 1);         
+            };
+            if(malPL < iz){
+                let interval3 =setInterval(() => {
+                    malPL++;
+                    if(malPL==1000){
+                        clearInterval(interval3);
+                    }
+                }, 1);         
+            };
+            if(malPL < iz){
+                let interval4 =setInterval(() => {
+                    malPL--;
+                    if(malPL==0){
+                        clearInterval(interval4);
+                    }
+                }, 1);         
+            };
+            if(malPA == iz && malPl == de){
+                user.remove();
+            };*/
+            mal.style.top = malPA +'px';
+            mal.style.left = malPL +'px';
+        }
+
+
+    </script>
+</body>
+</html>

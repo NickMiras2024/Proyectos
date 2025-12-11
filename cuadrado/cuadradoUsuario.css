@@ -1,0 +1,50 @@
+
+
+body{
+    position: relative;
+    background-image: url(fondo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 30%;
+    margin-top: -200px;
+}
+
+
+.personaje1{
+    /* position: absolute; */
+    background-image: url(cuadrado1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    height: 200px;
+    width: 190px;
+    z-index: 99;
+    padding: 200px 190px;
+
+}
+.a1{
+    padding: 100px;
+}
+
+
+.personaje2{
+    /* position: absolute; */
+    background-image:url(cuadrado2-removebg-preview.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    height: 90px;
+    width: 190px;
+    z-index: 99;
+    padding: 200px;
+}
+
+.personaje2:hover {
+    background-size: 250px;
+    height: 140px;
+    width: 240px;
+}
+
+.a2{
+    padding: 200px;
+}
