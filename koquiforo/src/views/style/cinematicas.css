@@ -1,0 +1,73 @@
+body {
+    background-color: #000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.p{
+    font-size: 200%;
+    color: #fff;
+    z-index: 99;
+    font-family: cursive;
+    display: none;
+    width: 100%;
+}
+
+
+
+
+.contenedor {
+    background: url('../asset/bosque7.png');
+    width: 80%;
+    height: 80%;
+    background-size: cover;
+    animation: AC 60s steps(1) ;
+}
+
+
+@keyframes AC {
+    0% {
+        background: url('../asset/bosque1.png');
+        background-size: cover;
+
+    }
+
+    12.5% {
+        background: url('../asset/bosque2.png');
+        background-size: cover;
+
+
+    }
+
+    25% {
+        background: url('../asset/bosque3.png');
+        background-size: cover;
+
+    }
+
+    37.5% {
+        background: url('../asset/bosque4.png');
+        background-size: cover;
+
+    }
+
+    45% {
+        background: url('../asset/bosque5.png');
+
+        background-size: cover;
+    }
+
+    67.5% {
+        background: url('../asset/bosque6.png');
+        background-size: cover;
+
+    }
+
+    80% {
+        background: url('../asset/bosque7.png');
+        background-size: cover;
+
+    }
+
+}

@@ -1,0 +1,66 @@
+{"met":"TV"};
+
+New_obj(ronda1${"x":300,"y":100}${"h":400,"w":900}$50$200${"coll":false});
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$100$500${"coll":false});
+New_obj(arena${"x":0,"y":-10}${"h":50,"w":10000}$0$2000000${"coll":false});
+
+
+
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":125,"w":165}${"vida": 200}$200);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$570);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$500$900${"coll":false});
+
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$770);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":400,"y":200}${"h":125,"w":165}${"vida": 200}$1270);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$1600);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$1600$2000${"coll":false});
+
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":200,"y":300}${"h":125,"w":165}${"vida": 200}$2000);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$2400);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":125,"w":165}${"vida": 200}$2800);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$3270);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$3200$3600${"coll":false});
+
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$3670);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":400,"y":200}${"h":125,"w":165}${"vida": 200}$4070);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$4400);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":200,"y":300}${"h":125,"w":165}${"vida": 200}$4800);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$4800$5200${"coll":false});
+
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$5200);
+
+New_obj(ronda2${"x":300,"y":100}${"h":400,"w":900}$5600$6000${"coll":false});
+
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":125,"w":165}${"vida": 200}$6400);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$6870);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$7270);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$7270$7670${"coll":false});
+
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":400,"y":200}${"h":125,"w":165}${"vida": 200}$7670);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$8000);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":200,"y":300}${"h":125,"w":165}${"vida": 200}$8400);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$8800);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":125,"w":165}${"vida": 200}$9200);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$9200$9670${"coll":false});
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$9670);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$10000);
+Enemy(calamar${"type":"CAC","TD": "nor"}${"x":400,"y":200}${"h":125,"w":165}${"vida": 200}$10470);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":100,"y":200}${"h":125,"w":165}${"vida": 200}$10800);
+New_obj(alguita${"x":400,"y":-90}${"h":400,"w":140}$10800$11200${"coll":false});
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":200,"y":300}${"h":125,"w":165}${"vida": 200}$11200);
+Enemy(medusa2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":125,"w":165}${"vida": 200}$11600);
+
+
+
+
+
+
+
+
+
+New_obj(ronda3${"x":300,"y":100}${"h":400,"w":900}$12000$12400${"coll":false});
+
+
+Enemy(medusa2${"type":"DF","TD": "BOS"}${"x":900,"y":400}${"h":125,"w":165}${"vida": 2000}$12600);
+
+Fin(10500);

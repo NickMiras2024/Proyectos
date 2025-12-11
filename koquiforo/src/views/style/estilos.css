@@ -1,0 +1,977 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.contenedorP {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    /* background: url('../asset/bosque.avif'); */
+    background-size: cover;
+    z-index: 99;
+}
+
+.mapaPiso {
+    width: 00px;
+    /* background: linear-gradient(to right, blue, rgb(0, 255, 128), rgb(238, 255, 0), rgb(0, 0, 0), rgb(255, 0, 0)); */
+    position: absolute;
+    bottom: 0px;
+    height: 60px;
+    z-index: 1;
+}
+
+.Player {
+    transform: scale(.5);
+    position: absolute;
+    background: url('../asset/sprite\(v\).png');
+    height: 110px;
+    width: 90px;
+    transform: scale(1.1);
+    z-index: 1;
+    left: 100px;
+    background-position: 0 0;
+}
+
+
+.PlayerMovimiento {
+    background: url('../asset/sprite\(v\).png');
+    animation: animacionCorrer 1s steps(1) infinite forwards;
+}
+
+
+@keyframes animacionCorrer {
+    0% {
+        background-position: -177 0;
+    }
+
+    18.18% {
+        background-position: -267 0;
+    }
+
+    36.36% {
+        background-position: -356 0;
+    }
+
+    54.54% {
+        background-position: -441 0;
+    }
+
+    74.9% {
+        background-position: -530 0;
+    }
+
+}
+
+.PlayerSalto {
+    animation: animacionSalto .3s steps(1);
+    background: url('../asset/sprite\(up\).png');
+
+}
+
+
+@keyframes animacionSalto {
+    0% {
+        background-position: 0 -110;
+    }
+
+    14.2% {
+        background-position: -85 -107;
+    }
+
+    28.6% {
+        background-position: -175 -105;
+    }
+
+    46.8% {
+        background-position: -265 -103;
+    }
+
+    61% {
+        background-position: -175 -105;
+    }
+
+    75.2% {
+        background-position: -85 -107;
+    }
+
+    99.4% {
+        background-position: -0 -110;
+    }
+
+}
+
+.PlayerEmbestida {
+    animation: animacionEmbestida .8s steps(1);
+    background: url('../asset/sprite\(A\).png');
+    background-position: -780 -0;
+}
+
+
+@keyframes animacionEmbestida {
+    0% {
+        background-position: -0 -0;
+    }
+
+    11.11% {
+        background-position: -90 0;
+    }
+
+    22.22% {
+        background-position: -180 -0;
+    }
+
+    33.33% {
+        background-position: -270 -0;
+    }
+
+    44.44% {
+        background-position: -360 -0;
+    }
+
+    55.55% {
+        background-position: -450 -0;
+    }
+
+    66.66% {
+        background-position: -551 -0;
+    }
+
+    77.77% {
+        background-position: -640 -0;
+        width: 130px;
+    }
+
+    88.88% {
+        background-position: -780 -0;
+        width: 170px;
+    }
+
+}
+
+
+
+
+
+.PlayerAHojasBol {
+    animation: animacionAHojas .4s steps(1);
+    background: url('../asset/sprite\(A\).png');
+}
+
+
+
+@keyframes animacionAHojas {
+    0% {
+        background-position: -0 -0;
+    }
+
+    25% {
+        background-position: -90 0;
+    }
+
+    50% {
+        background-position: -180 -0;
+    }
+
+    75% {
+        background-position: -270 -0;
+    }
+
+    100% {
+        background-position: -0 -0;
+    }
+}
+
+
+
+
+.PlayerNadando {
+    background: url('../asset/sprite\(nad\).png');
+    width: 205px;
+    height: 80px;
+    animation: animacionNadar .5s steps(1) infinite forwards;
+    background-repeat: no-repeat;
+}
+
+
+@keyframes animacionNadar {
+    0% {
+        background-position: -0 -16;
+    }
+
+    25% {
+        background-position: -240 -16;
+    }
+
+    50% {
+        background-position: -480 -16;
+    }
+
+    75% {
+        background-position: -720 -16;
+    }
+
+}
+
+
+
+
+
+
+
+
+.PlayerAHojasAliento {
+    background: url('../asset/coqui3\(a\).png');
+    background-size: cover;
+}
+
+.playerAtrapado {
+    background: url('../asset/sprite\(atrapado\).png');
+    height: 120px;
+    width: 140px;
+    background-size: 300% 290%;
+    animation: animacionAtrapado .4s steps(1) infinite alternate;
+
+}
+
+
+@keyframes animacionAtrapado {
+    0% {
+        background-position: -200% -0;
+    }
+
+    50% {
+
+        background-position: -100% -103%;
+    }
+
+    75% {
+        background-position: 5% -207%;
+    }
+
+
+}
+
+
+
+
+
+.menu {
+    width: 20%;
+    height: 500px;
+    margin: 100px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.opciones {
+    height: 35px;
+    width: 100%;
+    padding: 15px 0px 0px 0px;
+    text-align: center;
+    background: url('../asset/tronco.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff;
+    border-radius: 20px;
+    z-index: 99;
+
+}
+
+.opciones:hover {
+    cursor: pointer;
+    filter: grayscale(.9);
+}
+
+
+.menu2 {
+    display: none;
+    justify-content: center;
+    background: #46454562;
+    z-index: 99;
+    color: #ffffff;
+}
+
+
+.p {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 100;
+    width: 100%;
+    user-select: none;
+}
+
+.i {
+    font-style: normal;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    padding: 0px 10px;
+}
+
+.i:hover {
+    cursor: pointer;
+}
+
+#btnEnv {
+    height: 30px;
+    width: 90px;
+    background: #7fc215;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    z-index: 99;
+
+}
+
+#btnEnv:hover {
+    cursor: pointer;
+    background: #6ea713;
+
+}
+
+
+#btnEnv2 {
+    height: 30px;
+    width: 90px;
+    background: #7fc215;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    z-index: 99;
+
+}
+
+#btnEnv2:hover {
+    cursor: pointer;
+    background: #6ea713;
+
+}
+
+#btnEnv3 {
+    height: 30px;
+    width: 90px;
+    background: #7fc215;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    z-index: 99;
+
+}
+
+#btnEnv3:hover {
+    cursor: pointer;
+    background: #6ea713;
+
+}
+
+
+
+.tronco2 {
+    background: url('../asset/tronco2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 00 -15;
+    /* background-color: #ffffff; */
+}
+
+
+
+
+.GAN{
+    font-size: 200px;
+    text-align: center;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    color: #0004ff;
+    z-index: 99;
+    display: none;
+}
+
+
+
+
+/*fondos*/
+
+.mundoB{
+    background-image: url('../asset/mundoB.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 0px 180px 0px #000 inset;
+    z-index: 0;
+}
+
+
+
+
+.puerta{
+    background-image: url('../asset/puerta.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 0px 180px 0px #000 inset;
+    z-index: 0;
+}
+
+.fondo1N1 ,.fondo1N2,.fondo1N3,.fondo1N4,.fondo1N5,.fondo1N6,.fondo1N7,.fondo1N8,.fondo1N9,.fondo1N10,.fondo1NC {
+    background-image: url('../asset/fondo1N1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 0px 180px 0px #000 inset;
+    z-index: 0;
+}
+
+
+.fondo1NC{
+    background-image: url('../asset/bosque0_1H.png');
+
+}
+
+.fondo1N2{
+    background-image: url('../asset/fondo1N2.png');
+
+}
+
+.fondo1N3{
+    background-image: url('../asset/fondo1N3.png');
+
+}
+.fondo1N4{
+    background-image: url('../asset/fondo1N4.png');
+
+}
+.fondo1N5{
+    background-image: url('../asset/fondo1N5.png');
+
+}
+.fondo1N6{
+    background-image: url('../asset/fondo1N6.png');
+
+}
+.fondo1N7{
+    background-image: url('../asset/fondo1N7.png');
+
+}
+.fondo1N8{
+    background-image: url('../asset/fondo1N8.png');
+
+}
+.fondo1N9{
+    background-image: url('../asset/fondo1N9.png');
+
+}
+.fondo1N10{
+    background-image: url('../asset/fondo1N10.png');
+
+}
+
+
+
+
+
+.fondoNU {
+    background-image: url('../asset/fondoU0.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 0px 180px 0px #000 inset;
+    z-index: 0;
+}
+
+.fondoN1 {
+    background-image: url('../asset/fondoN1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 0px 180px 0px #000 inset;
+    z-index: 0;
+}
+
+
+
+.fondo0, .fondo-1 {
+    background-color: #000000;
+}
+
+
+
+
+
+
+.fondo1 ,.fondo2,.fondo3,.fondo4,.fondo5,.fondo6,.fondo7{
+    background: #59C3C4;
+    background-image: url('../asset/fondo1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.fondo7,.fondo8,.fondo9,.fondo10{
+    background:linear-gradient(#59C3C4,#214e4e); 
+}
+
+
+
+.varquitosL {
+    background-image: url('../asset/varquitosL2.png');
+    background-size: cover;
+    animation: varquitosLA 120s infinite;
+    z-index: -1;
+
+}
+
+
+
+
+@keyframes varquitosLA {
+    0% {
+        background-position: 0px 0px;
+
+    }
+
+    100% {
+        background-position: -2900px 0px;
+    }
+}
+
+
+
+.cartel1 ,.cartel2,.cartel3,.cartel4,.cartel5,.cartel6 {
+    background-image: url('../asset/tuto1.png');
+    background-size: contain;
+    animation: AparecerC 3s ;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cartel2 {
+    background-image: url('../asset/tuto2.png');
+}
+.cartel3 {
+    background-image: url('../asset/tuto3.png');
+}
+
+.cartel4 {
+    background-image: url('../asset/tuto4.png');
+}
+.cartel5{
+    background-image: url('../asset/tuto5.png');
+}
+.cartel6{
+    background-image: url('../asset/tuto6.png');
+}
+
+
+@keyframes AparecerC {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+.NA{
+    background-image: url('../asset/nubeApoyo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.contVida {
+    width: 14%;
+    height: 30px;
+    position: absolute;
+    border: 5px solid #fff;
+    overflow: hidden;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+}
+
+.vida {
+    width: 100%;
+    height: 100px;
+    float: left;
+    background-color: #6ea713;
+
+}
+
+
+.contCargaH {
+    width: 14%;
+    height: 20px;
+    position: absolute;
+    border: 5px solid #fff;
+    overflow: hidden;
+    z-index: 1;
+    top: 50px;
+    left: 10px;
+}
+
+.hojasC {
+    z-index: 0;
+    width: 100%;
+    height: 20px;
+    float: left;
+    background-color: #13a2a7;
+    transition: .5s;
+}
+
+.disparoBola {
+    background: url('../asset/bolaHojas.png');
+    background-size: cover;
+    position: absolute;
+}
+
+.disparoHoja {
+    background: url('../asset/coqui3\(AD\).png');
+    background-size: cover;
+    position: absolute;
+}
+
+
+
+.medusa {
+    background: url('../asset/medusa2.png');
+    background-position: 0 0;
+    background-size: cover;
+    animation: meducear .6s steps(1) infinite ;
+}
+
+@keyframes meducear {
+    0% {
+        transform: rotateY(180deg);
+    }
+
+    50% {
+        transform: rotateY(0deg);
+    }
+}
+
+
+
+.medusa2 {
+    background: url('../asset/medusa.png');
+    background-position: 0 0;
+    animation: meducear2 .4s steps(1) infinite forwards;
+}
+
+@keyframes meducear2 {
+    0% {
+        background-position: 0 0 ;
+    }
+
+    25% {
+        background-position: -176 0 ;
+
+    }
+    50% {
+        background-position: -352 0 ;
+
+    }
+    75% {
+        background-position: 0 0 ;
+
+    }
+}
+
+
+
+
+
+.disparosEnemigos {
+    background: radial-gradient(#00f7ff, #13a2a7, #0e7a7e);
+    border-radius: 50%;
+}
+
+
+.disparosEnemigos2 {
+    background: radial-gradient(#ff0000, #a71313, #7e0e0e);
+    border-radius: 50%;
+}
+
+
+.burbujas{
+    background: url('../asset/burbuja.png');
+    z-index: 99;
+    background-size: cover;
+}
+
+
+.disparosEnemigosG {
+    background: radial-gradient(#ffd900, #d8b90b, #ac9514);
+    border-radius: 50%;
+}
+
+
+
+
+.gaviota {
+    background: url('../asset/gabiota.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+
+.gaviotaC {
+    background: url('../asset/gabiotaC.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+
+@keyframes gaviotaV {
+    0% {
+        background-position: 0 0;
+    }
+
+    33% {
+        background-position: -93 0;
+
+    }
+
+    66% {
+        background-position: -186 0;
+    }
+
+}
+
+.gaviota2 {
+    background: url('../asset/gabiota2.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+
+.gaviota2C {
+    background: url('../asset/gabiota2C.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+
+
+
+.gaviotaG {
+    background: url('../asset/gabiotaGold.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+.gaviotaGC {
+    background: url('../asset/gabiotaGoldC.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV .3s infinite alternate steps(1);
+}
+
+
+.gaviota2_2{
+    background: url('../asset/gabiota2.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV22 .3s infinite alternate steps(1);
+}
+
+.gaviota2_2C{
+    background: url('../asset/gabiota2C.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: gaviotaV22 .3s infinite alternate steps(1);
+}
+
+@keyframes gaviotaV22 {
+    0% {
+        background-position: 0 0;
+    }
+
+    33% {
+        background-position: -186 0;
+
+    }
+
+    66% {
+        background-position: -372 0;
+
+    } 
+
+}
+
+
+.contVidaBOSS {
+    width: 25%;
+    height: 30px;
+    position: absolute;
+    border: 5px solid #fff;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    display: none;
+}
+
+.vidaBOSS {
+    width: 100%;
+    height: 100px;
+    float: left;
+    background-color: #a71313;
+}
+
+
+.ronda1{
+    background: url('../asset/ronda1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.ronda2{
+    background: url('../asset/ronda2.png');
+    background-size: cover;
+    background-position: center;
+}
+.ronda3{
+    background: url('../asset/ronda3.png');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.medusa {
+    background: url('../asset/medusa2.png');
+    background-position: 0 0;
+    background-size: cover;
+    animation: meducear .6s steps(1) infinite ;
+}
+
+@keyframes meducear {
+    0% {
+        transform: rotateY(180deg);
+    }
+
+    50% {
+        transform: rotateY(0deg);
+    }
+}
+
+
+
+.calamar {
+    background: url('../asset/calamar.png');
+    background-position: -0% 0;
+    background-size: 290% 100% ;
+    animation: calamear .7s steps(1) infinite reverse;
+} 
+
+@keyframes calamear {
+    0% {
+        background-position: 0 0 ;
+    }
+
+    25% {
+        background-position: -101% 0 ;
+
+    }
+    50% {
+        background-position: -204% 0 ;
+
+    }
+    75% {
+        background-position: 0 0 ;
+
+    }
+}
+
+
+
+.turtul1{
+    background: url('../asset/turtul.png');
+    background-size: cover ;
+    z-index: 99;
+}
+
+
+.alguita{
+    background: url('../asset/alga2.png');
+    background-size: 300% 100%;
+    animation: alguear 1s steps(1) infinite alternate;
+    background-position: 0 0 ;
+}
+
+
+ @keyframes alguear {
+    0%{
+        background-position: 0 0 ;
+
+    }
+    50%{
+        background-position: -100% 0 ;
+
+    }
+    75%{
+        background-position: -200% 0 ;
+
+    }
+} 
+
+
+.alga2{
+    background: url('../asset/alga.png');
+    background-size: 100px 100%;
+}
+
+
+.arena{
+    background-color: #faff96cb;
+}
+
+
+.tiburon {
+    background: url('../asset/tiburon.png') ;
+    /* background-position: 0 0; */
+    animation: moverTiburon .5s 0ms steps(1) infinite alternate;
+    background-size: 300% 100%;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+
+@keyframes moverTiburon {
+    0%{
+        background-position: 0 0 ;
+    }   
+    50%{
+        background-position: -100% 0 ;
+    }
+    75%{
+        background-position: -200% 0 ;
+
+    }
+    100%{
+        background-position: -250% 0 ;
+    }
+}

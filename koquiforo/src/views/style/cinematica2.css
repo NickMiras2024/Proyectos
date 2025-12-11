@@ -1,0 +1,57 @@
+body {
+    background-color: #000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.p{
+    font-size: 200%;
+    color: #fff;
+    z-index: 99;
+    font-family: cursive;
+    display: none;
+    width: 100%;
+}
+
+
+
+
+.contenedor {
+    width: 80%;
+    height: 80%;
+    background-size: cover;
+    animation: AC 20s steps(1) ;
+}
+
+
+@keyframes AC {
+    0% {
+        background: url('../asset/cine1.png');
+        background-size: cover;
+
+    }
+
+    20% {
+        background: url('../asset/cine2.png');
+
+        background-size: cover;
+
+
+    }
+
+    40% {
+        background: url('../asset/cine3.png');
+
+        background-size: cover;
+
+    }
+
+    60% {
+        background: url('../asset/cine4.png');
+
+        background-size: cover;
+    }
+
+
+}

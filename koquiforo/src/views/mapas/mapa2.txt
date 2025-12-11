@@ -1,0 +1,47 @@
+{"met":"T"};
+New_obj(tronco2${"x":300,"y":0}${"h":100,"w":330}$1$100000${"coll":true});
+New_obj(varquitosL${"x":0,"y":90}${"h":123,"w":4000}$0$100000${"coll":false});
+New_obj(NA${"x":100,"y":200}${"h":100,"w":150}$0$100000${"coll":true});
+New_obj(alga${"x":400,"y":-10}${"h":400,"w":100}$0$500${"coll":true});
+
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":100,"y":500}${"h":70,"w":100}${"vida": 10}$570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":70,"w":100}${"vida": 10}$570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":800,"y":200}${"h":70,"w":100}${"vida": 40}$570);
+
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":70,"w":100}${"vida": 40}$1570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":70,"w":100}${"vida": 40}$1570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":300}${"h":70,"w":100}${"vida": 40}$1570);
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":700,"y":500}${"h":70,"w":100}${"vida": 10}$2570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":100,"y":500}${"h":70,"w":100}${"vida": 40}$2570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":700,"y":100}${"h":70,"w":100}${"vida": 40}$2570);
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":300}${"h":70,"w":100}${"vida": 10}$3570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":200}${"h":70,"w":100}${"vida": 10}$3570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":400}${"h":70,"w":100}${"vida": 10}$3570);
+
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":100,"y":500}${"h":70,"w":100}${"vida": 10}$5570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":1000,"y":400}${"h":70,"w":100}${"vida": 10}$5570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":800,"y":200}${"h":70,"w":100}${"vida": 40}$5570);
+
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":70,"w":100}${"vida": 40}$5570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":70,"w":100}${"vida": 40}$5570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":300}${"h":70,"w":100}${"vida": 40}$5570);
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":700,"y":500}${"h":70,"w":100}${"vida": 10}$7570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":100,"y":500}${"h":70,"w":100}${"vida": 40}$7570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":700,"y":100}${"h":70,"w":100}${"vida": 40}$7570);
+
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":300}${"h":70,"w":100}${"vida": 10}$7570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":200}${"h":70,"w":100}${"vida": 10}$7570);
+Enemy(gaviota${"type":"CAC","TD": "nor"}${"x":800,"y":400}${"h":70,"w":100}${"vida": 10}$7570);
+
+
+
+Enemy(gaviota${"type":"CAC","TD": "BOS"}${"x":900,"y":300}${"h":70,"w":100}${"vida": 400}$9000);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":400}${"h":70,"w":100}${"vida": 40}$10570);
+Enemy(gaviota2${"type":"DIS","TD": "nor"}${"x":1000,"y":200}${"h":70,"w":100}${"vida": 40}$10570);
+
+Fin(10500);

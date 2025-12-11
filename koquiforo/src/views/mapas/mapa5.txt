@@ -1,0 +1,13 @@
+{"met":"T"};
+New_obj(tronco2${"x":300,"y":0}${"h":100,"w":330}$1$100000${"coll":true});
+New_obj(varquitosL${"x":0,"y":90}${"h":123,"w":4000}$0$100000${"coll":false});
+New_obj(cartel5${"x":500,"y":100}${"h":400,"w":500}$100$800${"coll":false});
+
+New_obj(NA${"x":700,"y":200}${"h":100,"w":150}$850$100000${"coll":true});
+New_obj(NA${"x":100,"y":200}${"h":100,"w":150}$850$100000${"coll":true});
+
+
+
+Enemy(gaviotaG${"type":"DF","TD": "BOS"}${"x":900,"y":300}${"h":70,"w":100}${"vida": 1000}$1500);
+
+Fin(10500);

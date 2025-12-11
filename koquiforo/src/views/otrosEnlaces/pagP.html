@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: #000;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .contenedor {
+            width: 80%;
+            height: 80%;
+            background-size: cover;
+            animation: AC 5s steps(1);
+        }
+
+
+        @keyframes AC {
+            0% {
+                background: url('../asset/paginaM.png');
+                background-size: cover;
+
+            }
+
+            20% {
+                background: url('../asset/paginaM.png');
+
+                background-size: cover;
+
+
+            }
+
+            40% {
+                background: url('../asset/paginaM.png');
+
+                background-size: cover;
+
+            }
+
+            60% {
+                background: url('../asset/paginaM.png');
+
+                background-size: cover;
+            }
+
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div class="contenedor" id="contenedor"></div>
+
+    <script>
+        let conte = document.getElementById('contenedor');
+
+
+        conte.addEventListener('animationend', () => {
+            window.location.href = '../index.html';
+        })
+    </script>
+</body>
+
+</html>

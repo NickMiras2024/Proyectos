@@ -1,0 +1,16 @@
+{"met":"L"};
+New_obj(puerta${"x":500,"y":0}${"h":600,"w":800}${"PORT":[true,0],"coll":false });
+New_obj(fondo1N1${"x":1500,"y":0}${"h":600,"w":800}${"PORT":[true,1],"coll":false });
+New_obj(fondo1N2${"x":2500,"y":0}${"h":600,"w":800}${"PORT":[true,2],"coll":false });
+New_obj(fondo1N3${"x":3500,"y":0}${"h":600,"w":800}${"PORT":[true,3],"coll":false });
+New_obj(fondo1N4${"x":4500,"y":0}${"h":600,"w":800}${"PORT":[true,4],"coll":false });
+New_obj(fondo1N5${"x":5500,"y":0}${"h":600,"w":800}${"PORT":[true,5],"coll":false });
+New_obj(fondo1NC${"x":6500,"y":0}${"h":600,"w":800}${"PORT":[true,"2C"],"coll":false });
+New_obj(fondo1N6${"x":7500,"y":0}${"h":600,"w":800}${"PORT":[true,6],"coll":false });
+New_obj(fondo1N7${"x":8500,"y":0}${"h":600,"w":800}${"PORT":[true,7],"coll":false });
+New_obj(fondo1N8${"x":9500,"y":0}${"h":600,"w":800}${"PORT":[true,8],"coll":false });
+New_obj(fondo1N9${"x":10500,"y":0}${"h":600,"w":800}${"PORT":[true,9],"coll":false });
+New_obj(fondo1N10${"x":11500,"y":0}${"h":600,"w":800}${"PORT":[true,10],"coll":false });
+
+
+
