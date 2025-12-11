@@ -1,0 +1,10 @@
+compilador : 
+g++ probador.o "..\transformerAPI\Self-attention\self_attention.o" "..\transformerAPI\redes_neuronales\redes_neuronales.o" -o probador.exe
+
+
+
+desde transformer para crear un prueba.exe en codificador  desde transformer 
+g++ codificador\codificador.o add_y_norm\add_y_norm.o redes_neuronales\redes_neuronales.o Self-attention\self_attention.o -o codificador\prueba.exe
+
+desde el modelo para crear un archivo F_avi.exe :
+g++ F_AVI.o "transformerAPIC++\add_y_norm\add_y_norm.o" "transformerAPIC++\codificador\codificador.o" "transformerAPIC++\codificador_posicional\cod_pos.o" "transformerAPIC++\diccionario\diccionario.o" "transformerAPIC++\embeding\embeding.o" "transformerAPIC++\redes_neuronales\redes_neuronales.o" "transformerAPIC++\Self-attention\self_attention.o" -o F_AVI.exe
