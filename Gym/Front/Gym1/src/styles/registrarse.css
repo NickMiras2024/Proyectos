@@ -1,0 +1,192 @@
+.container {
+    pointer-events: all;
+    background-color: #141414;
+    height: 300px;
+    width: 27%;
+    border-radius: 10px;
+
+    margin-left: 40%;
+    z-index: 99;
+    margin-top: 10%;
+    position: fixed;
+}
+
+.conteiner_V_C {
+    width: 100%;
+    /* background-color: #db6e20; */
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    box-sizing: border-box;
+    padding-right: 55%;
+    padding-left: 10px;
+    align-items: center;
+    pointer-events: none;
+    position: relative;
+}
+
+.checkV {
+    height: 20px;
+    width: 20px;
+    pointer-events: all;
+    position: absolute;
+
+
+}
+
+.p51{
+    position: absolute;
+    left: 40px;
+    font-size: 18px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+
+p {
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.pMail {
+    margin-top: 5px;
+
+}
+
+input {
+    width: 100%;
+    margin-top: 10px;
+    background: #3b3b3b;
+    border: none;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 40px;
+    font-size: 100%;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+
+.input1 {
+    height: 40px;
+
+}
+
+.inpSub {
+    width: 40%;
+    font-family: "anton";
+    font-weight: 100;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+    background: #f9ef23;
+    border: none;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.inpSub:hover {
+    background: #ddd31d;
+}
+
+.btnOlv {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: #ffff;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.btnOlv:hover {
+    cursor: pointer;
+}
+
+.btnsEnviar {
+    margin-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0% 20%;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+}
+
+.inpSub2 {
+
+    width: 40%;
+    height: 50px;
+    font-family: "anton";
+    font-weight: 100;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+    background: #fd7d23;
+    border: none;
+    border-radius: 10px;
+
+}
+
+.inpSub2:hover {
+    background: #db6e20;
+}
+
+
+@media (max-width: 770px) {
+    .container {
+        background-color: #141414;
+        height: 300px;
+        width: 100%;
+
+        margin-left: 0%;
+        z-index: 99;
+        margin-top: 25%;
+        position: fixed;
+    }
+
+    input {
+        font-size: 200%;
+    }
+
+    .input {
+        font-size: 100%;
+
+    }
+
+
+    .btnsEnviar {
+        transform: scale(1.2);
+    }
+
+}
+
+
+/* 
+@media screen and (max-width:800px) {
+
+    input,textarea{
+        width: 100%;
+        margin-left :-100px;
+    }
+    .inpSub{ 
+        left: -100px;
+        top: 10px;
+        margin:auto;
+       width: 101%;
+    }
+    p{
+        font-family: "Exo 2";
+        margin-left: -100px;
+    
+    }
+
+    h1{
+        font-size: 20px;
+        margin-left:100px;
+        margin-top: 80px;
+    }
+    
+    .pMail{
+        margin-top: 5px;
+    }
+} */

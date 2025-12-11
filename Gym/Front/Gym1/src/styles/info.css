@@ -1,0 +1,32 @@
+.info{
+    height: 50px;
+    width: 20%;
+    padding-bottom: 20px;
+    margin-left: 20%;
+    pointer-events: all;
+}
+
+.p12{
+    text-transform: uppercase;
+    font-family: "anton";
+    font-weight: 400;
+    font-size: 130%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+
+.p22{
+    color: #000;    
+    height: 40px;
+    width: 50px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 940px) {
+    .info{
+        pointer-events: all;
+    }
+}

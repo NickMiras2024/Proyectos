@@ -1,0 +1,15 @@
+.contForm{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 70%;
+    margin-left: 15%;
+}
+
+/* .selct1{
+    width: 100%;
+    height: 20px;
+} */
+
+

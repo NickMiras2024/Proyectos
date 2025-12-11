@@ -1,0 +1,14 @@
+.imgs1{
+    height: 150px;
+    width: 20%;
+    pointer-events: all;
+    margin-left: 10px;
+    transition: .4s;
+    min-width: 150px;
+    max-width: 200px;
+}
+.imgs1:hover{
+    transform: scale(2);
+    z-index: 99;
+
+}

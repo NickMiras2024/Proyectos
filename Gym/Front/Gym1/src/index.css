@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#root{
+  pointer-events: none;
+}
+
+body{
+  pointer-events: none;
+  
+}
+
+
+@media (max-width: 940px) {
+  body {
+    width: 940px;
+  }
+
+  html{
+    height: 3700px;
+  }
+
+  @media (max-width: 640px) {
+    body {
+      width: 640px;
+    }
+  
+  }
+
+}
